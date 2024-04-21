@@ -189,18 +189,19 @@ def create_chapter(chapter, book_dir, prompt):
     """
 
     # In the future, add other premium features (e.g., remove bad words, use formal or informal language, etc.)
-    basic_prompt = f"""Be a book reviewer and text editor to organize the following video transcript as chapters of a book.
-    1. Use markdown to write the text.
-    2. Modify the text to make it more clear.
-    3. Add commas and period when necessary.
-    4. Remove repeated words.
-    5. Include sub-headers when appropriate in the chapter.
-    6. Keep the original language of the text.
+    # basic_prompt = f"""Be a book reviewer and text editor to organize the following video transcript as chapters of a book.
+    # 1. Use markdown to write the text.
+    # 2. Modify the text to make it more clear.
+    # 3. Add commas and period when necessary.
+    # 4. Remove repeated words.
+    # 5. Include sub-headers when appropriate in the chapter.
+    # 6. Keep the original language of the text.
 
-    Text:
-    """ + chapter['text']
+    # Text:
+    # """ + chapter['text']
 
     print('prompt:', prompt)
+    prompt += f"\n- O número desse capítulo é {chapter['number']}" # Remover??
 
     basic_prompt = prompt + chapter['text']
 
@@ -210,7 +211,7 @@ def create_chapter(chapter, book_dir, prompt):
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[
-            {"role": "system", "content": basic_prompt},
+            {"role": "user", "content": basic_prompt},
         ]
     )
 
@@ -218,7 +219,7 @@ def create_chapter(chapter, book_dir, prompt):
 
     unique_id = generate_unique_id()
 
-    file_prefix = f"Chapter_{chapter['number']+1:00d}_{chapter['title'].replace(' ', '_')}.md"
+    file_prefix = f"Chapter_{chapter['number']:00d}_{chapter['title'].replace(' ', '_')}.md"
 
     with open(f'{book_dir}/' + file_prefix, 'w') as f:
         f.write(chapter_text)

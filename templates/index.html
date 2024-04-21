@@ -11,7 +11,7 @@
                     <!-- <span class="icon is-large"><i class="fab fa-youtube"></i></span> -->
                     Create a book from video transcripts
                 </h1>
-                <form method="post">
+                <form method="post" id="processForm">
                     <div class="field has-icons-left" id="inputContainer">
                         <input class="input" type="text" name="book_title" placeholder="Book title">
                         <div class="control has-icons-left">
@@ -20,7 +20,7 @@
                             <span class="icon is-small is-left">
                                 <i class="fas fa-link"></i>
                             </span>
-                            <textarea class="textbox" type="textbox" name="prompt" rows="7" cols="100">
+                            <!-- <textarea class="textbox" type="textbox" name="prompt" rows="7" cols="100">
 Be a book reviewer and text editor to organize the following video transcript as chapters of a book.
 - Use markdown to write the text.
 - Modify the text to make it more clear.
@@ -28,6 +28,14 @@ Be a book reviewer and text editor to organize the following video transcript as
 - Remove repeated words.
 - Include sub-headers when appropriate in the chapter.
 - Keep the original language of the text.
+                            </textarea> -->
+                            <textarea class="textbox" type="textbox" name="prompt" rows="7" cols="100">
+    Haja como um editor de livros para organizar essa transcrição de video de uma playlist do YouTube como um capítulo de livro.
+    - Adicione pontuação quando necessário.
+    - Não resuma o texto.
+    - Substitua referências a videos por capítulos, e inscritos por leitores.
+    - Use markdown para escrever o texto.
+    - Mantenha a língua original, português.
                             </textarea>
                         </div>
                     </div>
@@ -59,10 +67,16 @@ Be a book reviewer and text editor to organize the following video transcript as
                             </div>
                         </div>
                     </div>
+                    <div id="loader" style="display:none;"></div>
+    
+                    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
                 </form>
                 {% if error %}
                     <p class="help is-danger">{{ error }}</p>
                 {% endif %}
+
+                
+
             </div>
         </div>
     </div>
