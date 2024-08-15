@@ -183,22 +183,33 @@ def save_submission(video_id):
 
 
 
-def create_chapter(chapter, book_dir, prompt):
+def create_chapter(chapter, book_dir, prompt, language='pt'):
     """
     Each chapter has 'number', 'title', 'text'
     """
 
     # In the future, add other premium features (e.g., remove bad words, use formal or informal language, etc.)
-    # basic_prompt = f"""Be a book reviewer and text editor to organize the following video transcript as chapters of a book.
-    # 1. Use markdown to write the text.
-    # 2. Modify the text to make it more clear.
-    # 3. Add commas and period when necessary.
-    # 4. Remove repeated words.
-    # 5. Include sub-headers when appropriate in the chapter.
-    # 6. Keep the original language of the text.
+    if language == 'en':
+        basic_prompt = f"""Be a book reviewer and text editor to organize the following video transcript as chapters of a book.
+        1. Use markdown to write the text.
+        2. Modify the text to make it more clear.
+        3. Add commas and period when necessary.
+        4. Remove repeated words.
+        5. Include sub-headers when appropriate in the chapter.
+        6. Keep the original language of the text.
 
-    # Text:
-    # """ + chapter['text']
+        Text:
+        """ + chapter['text']
+    else:
+        basic_prompt = f"""Haja como um editor de livros para organizar essa transcrição de video de uma playlist do YouTube como um capítulo de livro.
+        - Adicione pontuação quando necessário.
+        - Não resuma o texto.
+        - Substitua referências a videos por capítulos, e inscritos por leitores.
+        - Use markdown para escrever o texto.
+        - Mantenha a língua original, português.
+
+        Texto:
+        """ + chapter['text']
 
     print('prompt:', prompt)
     prompt += f"\n- O número desse capítulo é {chapter['number']}" # Remover??
@@ -211,7 +222,7 @@ def create_chapter(chapter, book_dir, prompt):
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[
-            {"role": "user", "content": basic_prompt},
+            {"role": "system", "content": basic_prompt},
         ]
     )
 

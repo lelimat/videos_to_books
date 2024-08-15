@@ -36,8 +36,7 @@ def index():
         if not is_valid:
             return render_template('index.html', error='Invalid YouTube link: ' + video_url)
         
-        i = 1
-        for video_id in video_ids[:2]: # REMOVE [:3] - JUST FOR TESTING!!
+        for i,video_id in enumerate(video_ids[:4], start=1): # REMOVE [:3] - JUST FOR TESTING!!
 
             raw_text = ''
 
@@ -64,7 +63,6 @@ def index():
             #     save_submission(video_id)  # Save the video ID and the date
             #     return redirect(url_for('transcript', video_id=video_id))
             
-            i += 1
 
         if chapters:
 
@@ -117,4 +115,4 @@ def process_chapters(book_title, chapters, failed_transcripts, prompt):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=4444)
+    app.run(debug=True, host='0.0.0.0', port=43210)

@@ -29,14 +29,6 @@ Be a book reviewer and text editor to organize the following video transcript as
 - Include sub-headers when appropriate in the chapter.
 - Keep the original language of the text.
                             </textarea> -->
-                            <textarea class="textbox" type="textbox" name="prompt" rows="7" cols="100">
-    Haja como um editor de livros para organizar essa transcrição de video de uma playlist do YouTube como um capítulo de livro.
-    - Adicione pontuação quando necessário.
-    - Não resuma o texto.
-    - Substitua referências a videos por capítulos, e inscritos por leitores.
-    - Use markdown para escrever o texto.
-    - Mantenha a língua original, português.
-                            </textarea>
                         </div>
                     </div>
 
@@ -69,7 +61,7 @@ Be a book reviewer and text editor to organize the following video transcript as
                     </div>
                     <div id="loader" style="display:none;"></div>
     
-                    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+                    <!-- <script src="{{ url_for('static', filename='js/scripts.js') }}"></script> -->
                 </form>
                 {% if error %}
                     <p class="help is-danger">{{ error }}</p>
