@@ -1,3 +1,6 @@
-# videos_to_books
+# Videos to Books
 
-A web application to create videos from video transcripts.
+**Work in Progress**
+A web application to create books from video transcripts.
+We are currently working with YouTube's and OpenAI's APIs.
+The languages currently supported are English and Portuguese.
